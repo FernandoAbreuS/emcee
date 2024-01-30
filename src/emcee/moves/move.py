@@ -31,10 +31,10 @@ class Move(object):
         m1 = subset & accepted
         #m2 = accepted[subset]
         m2 = accepted[:, subset]
-        print("m1: n", m1)
-        print("m2: \n", m2)
-        old_state.coords[m1] = new_state.coords[m2]
-        old_state.log_prob[m1] = new_state.log_prob[m2]
+        #print("m1: n", m1.shape)
+        #print("m2: \n", m2.shape)
+        old_state.coords[m1[-1]] = new_state.coords[m2[-1]]
+        old_state.log_prob[m1[-1]] = new_state.log_prob[m2[-1]]
 
         if new_state.blobs is not None:
             if old_state.blobs is None:
@@ -43,6 +43,6 @@ class Move(object):
                     "you also need to provide the current list of "
                     "blobs at that position."
                 )
-            old_state.blobs[m1] = new_state.blobs[m2]
+            old_state.blobs[m1[-1]] = new_state.blobs[m2[-1]]
 
         return old_state
