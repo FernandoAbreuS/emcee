@@ -123,7 +123,7 @@ class HDFBackend(Backend):
             g.create_dataset(
                 "accepted",
                 #data=np.zeros(nwalkers),
-                data=np.zeros(1, nwalkers),
+                data=np.zeros(shape=(1, nwalkers)),
                 compression=self.compression,
                 compression_opts=self.compression_opts,
             )

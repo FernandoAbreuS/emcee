@@ -29,7 +29,7 @@ class Backend(object):
         self.ndim = int(ndim)
         self.iteration = 0
         #self.accepted = np.zeros(self.nwalkers, dtype=self.dtype)
-        self.accepted = np.zeros(1, self.nwalkers, dtype=self.dtype)
+        self.accepted = np.zeros(shape=(1, self.nwalkers), dtype=self.dtype)
         self.chain = np.empty((0, self.nwalkers, self.ndim), dtype=self.dtype)
         self.log_prob = np.empty((0, self.nwalkers), dtype=self.dtype)
         self.blobs = None
