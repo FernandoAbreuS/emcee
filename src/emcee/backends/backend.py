@@ -28,7 +28,8 @@ class Backend(object):
         self.nwalkers = int(nwalkers)
         self.ndim = int(ndim)
         self.iteration = 0
-        self.accepted = np.zeros(self.nwalkers, dtype=self.dtype)
+        #self.accepted = np.zeros(self.nwalkers, dtype=self.dtype)
+        self.accepted = np.zeros(1, self.nwalkers, dtype=self.dtype)
         self.chain = np.empty((0, self.nwalkers, self.ndim), dtype=self.dtype)
         self.log_prob = np.empty((0, self.nwalkers), dtype=self.dtype)
         self.blobs = None
@@ -206,7 +207,7 @@ class Backend(object):
             raise ValueError(
                 "invalid blobs size; expected {0}".format(nwalkers)
             )
-        if accepted.shape != (nwalkers,):
+        if accepted.shape[1] != nwalkers:
             raise ValueError(
                 "invalid acceptance size; expected {0}".format(nwalkers)
             )
@@ -226,7 +227,8 @@ class Backend(object):
         self.log_prob[self.iteration, :] = state.log_prob
         if state.blobs is not None:
             self.blobs[self.iteration, :] = state.blobs
-        self.accepted += accepted
+        #self.accepted += accepted
+        self.accepted = np.concatenate([self.accepted, accepted])
         self.random_state = state.random_state
         self.iteration += 1
 

@@ -122,7 +122,8 @@ class HDFBackend(Backend):
             g.attrs["iteration"] = 0
             g.create_dataset(
                 "accepted",
-                data=np.zeros(nwalkers),
+                #data=np.zeros(nwalkers),
+                data=np.zeros(1, nwalkers),
                 compression=self.compression,
                 compression_opts=self.compression_opts,
             )
@@ -259,7 +260,8 @@ class HDFBackend(Backend):
             g["log_prob"][iteration, :] = state.log_prob
             if state.blobs is not None:
                 g["blobs"][iteration, :] = state.blobs
-            g["accepted"][:] += accepted
+            #g["accepted"][:] += accepted
+            g["accepted"][:] = np.concatenate([g["accepted"][:], accepted])
 
             for i, v in enumerate(state.random_state):
                 g.attrs["random_state_{0}".format(i)] = v
