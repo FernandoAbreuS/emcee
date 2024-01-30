@@ -29,7 +29,8 @@ class Move(object):
         if subset is None:
             subset = np.ones(len(old_state.coords), dtype=bool)
         m1 = subset & accepted
-        m2 = accepted[subset]
+        #m2 = accepted[subset]
+        m2 = accepted[:, subset]
         old_state.coords[m1] = new_state.coords[m2]
         old_state.log_prob[m1] = new_state.log_prob[m2]
 

@@ -56,7 +56,8 @@ class MHMove(Move):
 
         # Loop over the walkers and update them accordingly.
         lnpdiff = new_log_probs - state.log_prob + factors
-        accepted = np.log(model.random.rand(nwalkers)) < lnpdiff
+        #accepted = np.log(model.random.rand(nwalkers)) < lnpdiff
+        accepted = (np.log(model.random.rand(nwalkers)) < lnpdiff).reshape(1, -1)
 
         # Update the parameters
         new_state = State(q, log_prob=new_log_probs, blobs=new_blobs)
