@@ -124,6 +124,7 @@ class HDFBackend(Backend):
                 "accepted",
                 #data=np.zeros(nwalkers),
                 data=np.zeros(shape=(1, nwalkers)),
+                maxshape=(None, nwalkers),
                 compression=self.compression,
                 compression_opts=self.compression_opts,
             )
