@@ -261,7 +261,10 @@ class HDFBackend(Backend):
             if state.blobs is not None:
                 g["blobs"][iteration, :] = state.blobs
             #g["accepted"][:] += accepted
-            g["accepted"][:] = np.concatenate([g["accepted"][:], accepted])
+            #g["accepted"][:] = np.concatenate([g["accepted"][:], accepted])
+            new_accepted = np.concatenate([g["accepted"][:], accepted])
+            g["accepted"].resize(iteration, axis=0)
+            g["accepted"][:] = new_accepted
 
             for i, v in enumerate(state.random_state):
                 g.attrs["random_state_{0}".format(i)] = v
