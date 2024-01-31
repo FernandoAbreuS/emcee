@@ -539,7 +539,8 @@ class EnsembleSampler(object):
     @property
     def acceptance_fraction(self):
         """The fraction of proposed steps that were accepted"""
-        return self.backend.accepted / float(self.backend.iteration)
+        #return self.backend.accepted / float(self.backend.iteration)
+        return self.backend.accepted.sum(axis=0) / float(self.backend.iteration)
 
     @property
     @deprecated("get_chain()")

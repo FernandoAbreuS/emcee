@@ -208,7 +208,6 @@ class Backend(object):
                 "invalid blobs size; expected {0}".format(nwalkers)
             )
         #if accepted.shape != (nwalkers,):
-        print(accepted.shape)
         if accepted.shape[1] != nwalkers:
             raise ValueError(
                 "invalid acceptance size; expected {0}".format(nwalkers)
